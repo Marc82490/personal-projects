@@ -19,15 +19,17 @@ def handle_exit(pi):
     file.close()
     sys.exit()
 
-def chudnvosky(iterations):
+def chudnvosky(precision):
     """
     Uses the Chudnovsky algorithm to quickly calculate an estimation of pi to arbitrary precision. Note that the last
     2 digits are not guaranteed to be accurate.
-    :param iterations: The number of times to loop through the summation of the Chudnovsky algorithm. Also used to
-                        determine the precision of the resulting estimation.
+    :param precision: Determines the precision of the resulting estimation, and is used to determine how many times to
+                      loop through the summation portion of the algorithm.
     """
-    getcontext().prec = iterations + 1    # Sets the precision of the decimal type variables
+    getcontext().prec = precision + 1   # Sets the precision of the decimal type variables
     k = 0
+    # Algorithm computes ~14 digits of pi per loop, so only need to loop 1/14 as many times as the precision
+    iterations = precision // 14
     # Initialize variables as decimal types
     a_sum = Decimal(0)
     b_sum = Decimal(0)
