@@ -1,13 +1,17 @@
 # Author: Marc Zalik
 # Date: 2020-10-15
 # Description: Uses the Chudnovsky algorithm to compute an estimation of pi using of arbitrary precision. Credit to
-#              Nick Craig-Wood for the algorithm.
+#              Nick Craig-Wood for the algorithm: https://www.craig-wood.com/nick/articles/pi-chudnovsky/
 
 import math
 from decimal import Decimal, getcontext
 import sys
 
 def handle_exit(pi):
+    """
+    At program exit, write current value of pi to a file in the local directory.
+    :param pi: The estimated value of pi at time of program ending.
+    """
     print("Writing pi to file...")
     filename = "pi.txt"
     file = open(filename, 'w')
@@ -16,6 +20,11 @@ def handle_exit(pi):
     sys.exit()
 
 def chudnvosky(iterations):
+    """
+    Uses the Chudnovsky algorithm to quickly calculate an estimation of pi to arbitrary precision.
+    :param iterations: The number of times to loop through the summation of the Chudnovsky algorithm. Also used to
+                        determine the precision of the resulting estimation.
+    """
     getcontext().prec = iterations + 1
     k = 0
     a_sum = Decimal(0)
@@ -40,6 +49,12 @@ def chudnvosky(iterations):
     handle_exit(pi)
 
 def combine(a, b):
+    """
+    Takes the A term and B term and combines them with the constant term to return the final estimated value of pi.
+    :param a: The A term according to Craig-Wood version of Chudnovsky.
+    :param b: The B term according to Craig-Wood version of Chudnovsky.
+    :return: The final estimation of pi.
+    """
     sum = Decimal(0)
     constant = Decimal(426880 * Decimal(10005).sqrt())
     sum = (13591409 * a) + (545140134 * b)
