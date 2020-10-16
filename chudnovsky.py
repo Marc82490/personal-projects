@@ -8,7 +8,7 @@ from decimal import Decimal, getcontext
 import sys
 
 def handle_exit(pi):
-    print("all done")
+    print("Writing pi to file...")
     filename = "pi.txt"
     file = open(filename, 'w')
     file.write(str(pi))
