@@ -45,6 +45,9 @@ def chudnvosky(precision):
             a_sum += a_k
             b_sum += b_k
             k += 1
+            # Print current status for long precisions
+            if iter % 100 == 0:
+                print("Loop:", iter)
         except KeyboardInterrupt:
             # Handle early stopping and still write the value of pi
             pi = combine(a_sum, b_sum)
